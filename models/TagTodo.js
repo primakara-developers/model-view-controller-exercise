@@ -1,7 +1,7 @@
-import Connector from "../db/connector.js";
+import connector from "../db/connector.js";
 
-const db = await Connector();
-const table = "tag";
+const db = await connector();
+const table = "Tags";
 
 export default class TagTodo {
 	static create(todo, description, tag) {
@@ -12,7 +12,7 @@ export default class TagTodo {
 
 	static delete() {}
 
-	static find() {
+	static async find() {
 		const sql = `SELECT * FROM ${table}`;
 		const [rows] = await db.execute(sql)
 

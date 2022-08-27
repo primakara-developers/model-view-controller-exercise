@@ -1,10 +1,11 @@
+import 'dotenv/config'
 import mysql from "mysql2/promise";
 
-export default async function Connector() {
-	return await mysql.createConnection({
+export default async function connector() {
+	return mysql.createConnection({
 		host: "localhost",
-		user: "root",
-		password: "root1234",
-    database: "db_todolist"
+		user: process.env.MYSQL_USER,
+		password: process.env.MYSQL_PASSWORD,
+		database: process.env.MYSQL_DATABASE
 	});
 }
