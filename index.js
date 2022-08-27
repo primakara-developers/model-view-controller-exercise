@@ -1,5 +1,5 @@
+import 'dotenv/config'
 import express from "express";
-import TodoList from "./models/TodoList.js";
 const app = express();
 
 // set the view engine to ejs
@@ -17,10 +17,5 @@ app.get("/about", function (req, res) {
 	res.render("pages/about");
 });
 
-app.listen(8080);
-console.log("Server is listening on port 8080");
-
-// new TodoList();
-// const a = await TodoList.findOne("title", "P")
-// console.log(a);
-
+app.listen(process.env.PORT);
+console.log(`Server is listening on port ${process.env.PORT}`);
