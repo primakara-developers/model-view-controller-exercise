@@ -1,0 +1,29 @@
+{
+  "name": "mvc",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "With express and ejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/primakara-developers/mvc.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/primakara-developers/mvc/issues"
+  },
+  "homepage": "https://github.com/primakara-developers/mvc#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3"
+  },
+  "devDependencies": {
+    "prettier": "^2.6.2"
+  }
+}
