@@ -4,18 +4,31 @@ const db = await connector();
 const table = "Todos";
 
 export default class TodoList {
-  static async create(tag_id, title, description) {
+  static async create(data) {
     const sql = `
 			INSERT INTO Todos(id, tag_id, title, description)
-			VALUES ("${uuidv4()}", "${tag_id}", "${title}", "${description}")
+			VALUES ("${uuidv4()}", "${data.tag_id}", "${data.title}", "${data.description}")
 		`;
 		const [rows] = await db.execute(sql);
 		return rows
   }
 
-  static edit() {}
+  static async edit(newData) {
+		const sql = `
+      UPDATE ${table} SET title = "${newData.title}", description = "${newData.description}",
+      tag_id = "${newData.tag_id}" WHERE id = "${newData.id}"
+    `;
+    const [rows] = await db.execute(sql);
+		return rows;
+	}
 
-  static delete() {}
+	static async delete(id) {
+    const sql = `
+      DELETE FROM ${table} WHERE id = "${id}"
+    `;
+    const [rows] = await db.execute(sql);
+		return rows;
+  }
 
   static async find() {
     const sql = `SELECT * FROM ${table}`;
@@ -35,3 +48,4 @@ export default class TodoList {
     return rows;
   }
 }
+
