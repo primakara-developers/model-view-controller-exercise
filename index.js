@@ -14,6 +14,10 @@ app.set("view engine", "ejs");
 // index/todos page
 app.get("/", TodoController.index);
 app.post("/add", TodoController.createTodo);
+
+app.get("/edit/:id", TodoController.editPage);
+app.post("/edit/:id", TodoController.updateTodo);
+
 app.get("/delete/:id", TodoController.deleteTodo);
 
 // about page

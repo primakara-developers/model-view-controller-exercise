@@ -10,14 +10,14 @@ export default class TodoController {
 
   static async createTodo(req, res) {
     try {
-      if (req.body.title || req.body.description)
+      if (req.body.title) {
         await TodoList.create(
           req.body.tag,
           req.body.title,
           req.body.description
         );
-      else {
-        res.send("Lengkapin formnya dlu bro!");
+      } else {
+        res.send("Title tidak boleh kosong!");
       }
     } catch (err) {
       res.send(err);
@@ -25,18 +25,35 @@ export default class TodoController {
     res.redirect("/");
   }
 
-  static async editTodo(req, res) {
-    await TodoList.edit(
-      req.body.id,
-      req.body.tag,
-      req.body.title,
-      req.body.description
-    );
+  static async editPage(req, res) {
+    const tags = await TagTodo.find();
+    try {
+      const selectedTodo = await TodoList.findOneById(req.params.id);
+      res.render("pages/edit", { selectedTodo, tags });
+    } catch (err) {
+      res.send("Data yang dipilih tidak ada!");
+    }
+  }
+
+  static async updateTodo(req, res) {
+    try {
+      if (req.body.title !== "") {
+        await TodoList.edit(
+          req.params.id,
+          req.body.tag,
+          req.body.title,
+          req.body.description
+        );
+      } else {
+        res.send("Title tidak boleh kosong!");
+      }
+    } catch (err) {
+      res.send(err);
+    }
     res.redirect("/");
   }
 
   static async deleteTodo(req, res) {
-    console.log(req.body);
     await TodoList.delete(req.params.id);
     res.redirect("/");
   }
