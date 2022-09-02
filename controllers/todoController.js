@@ -8,6 +8,11 @@ export default class TodoController {
     res.render("pages/index", { todos, tags });
   }
 
+  static async addPage(_, res) {
+    const tags = await TagTodo.find();
+    res.render("pages/add", { tags });
+  }
+
   static async createTodo(req, res) {
     try {
       if (req.body.title) {
