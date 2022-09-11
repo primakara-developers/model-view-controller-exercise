@@ -9,6 +9,8 @@ services:
       MYSQL_PASSWORD: primdev
       MYSQL_DATABASE: primdev
       MYSQL_ROOT_PASSWORD: primdev
+    ports:
+      - 3306:3306
 
   adminer:
     image: adminer
