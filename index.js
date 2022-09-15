@@ -12,12 +12,9 @@ app.set("view engine", "ejs");
 // use res.render to load up an ejs view file
 
 // index/todos page
-app.get("/", TodoController.index);
+app.get("/", TodoController.getTodo);
 app.post("/add", TodoController.createTodo);
-app.get("/add", TodoController.addPage);
-app.get("/edit/:id", TodoController.editPage);
 app.post("/edit/:id", TodoController.updateTodo);
-
 app.get("/delete/:id", TodoController.deleteTodo);
 
 // about page

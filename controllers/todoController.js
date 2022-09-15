@@ -2,15 +2,9 @@ import TodoList from "../models/TodoList.js";
 import TagTodo from "../models/TagTodo.js";
 
 export default class TodoController {
-  static async index(_, res) {
+  static async getTodo(_, res) {
     const todos = await TodoList.find();
-    const tags = await TagTodo.find();
-    res.render("pages/index", { todos, tags });
-  }
-
-  static async addPage(_, res) {
-    const tags = await TagTodo.find();
-    res.render("pages/add", { tags });
+    res.json({"status":200, "data":todos});
   }
 
   static async createTodo(req, res) {
@@ -27,17 +21,7 @@ export default class TodoController {
     } catch (err) {
       res.send(err);
     }
-    res.redirect("/");
-  }
-
-  static async editPage(req, res) {
-    const tags = await TagTodo.find();
-    try {
-      const selectedTodo = await TodoList.findOneById(req.params.id);
-      res.render("pages/edit", { selectedTodo, tags });
-    } catch (err) {
-      res.send("Data yang dipilih tidak ada!");
-    }
+    res.json({"status":201, "message":"success"});
   }
 
   static async updateTodo(req, res) {
@@ -55,11 +39,11 @@ export default class TodoController {
     } catch (err) {
       res.send(err);
     }
-    res.redirect("/");
+    res.json({"status":200, "message":"success"});
   }
 
   static async deleteTodo(req, res) {
     await TodoList.delete(req.params.id);
-    res.redirect("/");
+    res.json({"status":200, "message":"success"});
   }
 }
