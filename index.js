@@ -4,6 +4,7 @@ import TodoController from "./controllers/todoController.js";
 
 const app = express();
 
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // set the view engine to ejs
@@ -14,8 +15,8 @@ app.set("view engine", "ejs");
 // index/todos page
 app.get("/", TodoController.getTodo);
 app.post("/add", TodoController.createTodo);
-app.post("/edit/:id", TodoController.updateTodo);
-app.get("/delete/:id", TodoController.deleteTodo);
+app.put("/edit/:id", TodoController.updateTodo);
+app.delete("/delete/:id", TodoController.deleteTodo);
 
 // about page
 app.get("/about", function (req, res) {

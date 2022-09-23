@@ -4,10 +4,11 @@ import TagTodo from "../models/TagTodo.js";
 export default class TodoController {
   static async getTodo(_, res) {
     const todos = await TodoList.find();
-    res.json({"status":200, "data":todos});
+    res.json({ status: 200, data: todos });
   }
 
   static async createTodo(req, res) {
+    console.log(req.body);
     try {
       if (req.body.title) {
         await TodoList.create(
@@ -21,7 +22,7 @@ export default class TodoController {
     } catch (err) {
       res.send(err);
     }
-    res.json({"status":201, "message":"success"});
+    res.json({ status: 201, message: "success" });
   }
 
   static async updateTodo(req, res) {
@@ -39,11 +40,11 @@ export default class TodoController {
     } catch (err) {
       res.send(err);
     }
-    res.json({"status":200, "message":"success"});
+    res.json({ status: 200, message: "success" });
   }
 
   static async deleteTodo(req, res) {
     await TodoList.delete(req.params.id);
-    res.json({"status":200, "message":"success"});
+    res.json({ status: 200, message: "success" });
   }
 }
