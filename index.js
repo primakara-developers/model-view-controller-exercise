@@ -1,6 +1,6 @@
 import "dotenv/config";
 import express from "express";
-import router from "router";
+import router from "./router/index.js";
 
 const app = express();
 
@@ -15,5 +15,6 @@ app.get("/", function (req, res) {
   res.send("Hello World");
 });
 
-app.listen(process.env.PORT);
-console.log(`Server is listening on port ${process.env.PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is listening on port ${process.env.PORT}`);
+});
