@@ -7,20 +7,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// set the view engine to ejs
-app.set("view engine", "ejs");
-
-// use res.render to load up an ejs view file
-
 // index/todos page
-app.get("/", TodoController.getTodo);
-app.post("/add", TodoController.createTodo);
-app.put("/edit/:id", TodoController.updateTodo);
-app.delete("/delete/:id", TodoController.deleteTodo);
+app.get("/todo", TodoController.getTodo);
+app.post("/todo/add", TodoController.createTodo);
+app.put("/todo/edit/:id", TodoController.updateTodo);
+app.delete("/todo/delete/:id", TodoController.deleteTodo);
 
 // about page
-app.get("/about", function (req, res) {
-  res.render("pages/about");
+app.get("/", function (req, res) {
+  res.send("Hello World");
 });
 
 app.listen(process.env.PORT);
